@@ -1,0 +1,92 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="7BA8359E-A215-401A-FC2F-82ADE5DB2022" schemaObject="E1F01F29-6FA3-D01F-474A-F64B595B1996" name="PLAYER">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>SLISOW_P</sourceObjSchema>
+<sourceObjName>PLAYER</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:51 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PLAYER_ID" id="4D1AE4D7-24E4-7557-D1CC-A44A1D8476E7">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER</sourceObjSchema>
+<sourceObjName>PLAYER_ID</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:52 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAME" id="8BB25EFA-C53A-FBBF-EB20-9EB5EF8BB286">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER</sourceObjSchema>
+<sourceObjName>NAME</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:52 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40 BYTE</dataTypeSize>
+<ownDataTypeParameters>40 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="AGE" id="E0FC13A3-2D07-F2F6-AC14-C92EC5A173E2">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER</sourceObjSchema>
+<sourceObjName>AGE</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:52 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NATIONALITY_ID" id="C7DBE3B3-8646-45E7-A19B-003768FC8302">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER</sourceObjSchema>
+<sourceObjName>NATIONALITY_ID</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:52 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="CLUB_ID" id="B98DA126-CB37-C131-FE4C-B20014484B6E">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER</sourceObjSchema>
+<sourceObjName>CLUB_ID</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:52 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+</Table>

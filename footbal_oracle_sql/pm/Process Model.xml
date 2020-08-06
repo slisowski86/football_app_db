@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ProcessModel class="oracle.dbtools.crest.model.design.process.ProcessModel" name="Process Model" id="0B91E829-6D31-12DF-4053-1F39F28D6410">
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:24 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</ProcessModel>

@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="1D78A734-6452-04B0-4000-0B50E2790858">
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:24 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>

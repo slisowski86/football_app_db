@@ -1,0 +1,126 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="37F2132A-68B3-2757-A3BD-502DCC0692AC" schemaObject="E1F01F29-6FA3-D01F-474A-F64B595B1996" name="PLAYER_STATS">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>SLISOW_P</sourceObjSchema>
+<sourceObjName>PLAYER_STATS</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:57:20 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="PLAYER_ID" id="EF256F1D-3640-3C87-4FCB-2752B736FCE2">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER_STATS</sourceObjSchema>
+<sourceObjName>PLAYER_ID</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:57:20 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PLAYEDGAMES" id="C1678CA7-AD4C-B94B-643B-E067FD247E13">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER_STATS</sourceObjSchema>
+<sourceObjName>PLAYEDGAMES</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:57:20 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PLAYEDMINS" id="E5DB6384-A25F-E701-2BC9-2342742FD9EE">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER_STATS</sourceObjSchema>
+<sourceObjName>PLAYEDMINS</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:57:20 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PERFDEF" id="47265F49-1348-90A0-89D1-F3E1927E1845">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER_STATS</sourceObjSchema>
+<sourceObjName>PERFDEF</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:57:20 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PERFATTACK" id="48379EE4-301D-9D12-4197-8148AE1A8E94">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER_STATS</sourceObjSchema>
+<sourceObjName>PERFATTACK</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:57:20 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>3</dataTypeScale>
+<ownDataTypeParameters>,38,3</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="PERFPOSS" id="36B2C9D1-3B20-0D42-67F4-007BDF18BD26">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER_STATS</sourceObjSchema>
+<sourceObjName>PERFPOSS</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:57:20 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="TOTAL" id="B8918C77-182E-FB3A-261D-3371FCC6CC98">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>PLAYER_STATS</sourceObjSchema>
+<sourceObjName>TOTAL</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:57:20 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>3</dataTypeScale>
+<ownDataTypeParameters>,38,3</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+</Table>

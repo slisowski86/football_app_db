@@ -1,0 +1,73 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="BD4E4982-DA54-9152-FE25-38742B9AE007" schemaObject="E1F01F29-6FA3-D01F-474A-F64B595B1996" name="NATIONSv1">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>SLISOW_P</sourceObjSchema>
+<sourceObjName>NATIONS</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 23:09:22 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="NATIONALITY_ID" id="20CD2A69-C0AF-F601-DDDE-AF969F4B0A58">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>NATIONSv1</sourceObjSchema>
+<sourceObjName>NATIONALITY_ID</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 23:09:22 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>38</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,38,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NATIONALITY_NAME" id="F64B5FC2-6CCA-7E99-3A83-6971260E37BE">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>NATIONSv1</sourceObjSchema>
+<sourceObjName>NATIONALITY_NAME</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 23:09:22 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>26 BYTE</dataTypeSize>
+<ownDataTypeParameters>26 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="BF4885DA-4DFD-009C-05A4-EA30B4FC4CE5" name="NATIONS_PKv1">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>SLISOW_P</sourceObjSchema>
+<sourceObjName>NATIONS_PKv1</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 23:09:23 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="20CD2A69-C0AF-F601-DDDE-AF969F4B0A58"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5806CE84-B083-A98B-A005-0EFFF3208CCE" schemaObject="E1F01F29-6FA3-D01F-474A-F64B595B1996" name="NATIONS_PK">
+<sourceConnName>SLISOW_P</sourceConnName>
+<sourceObjSchema>SLISOW_P</sourceObjSchema>
+<sourceObjName>NATIONS_PK</sourceObjName>
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 23:09:22 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="20CD2A69-C0AF-F601-DDDE-AF969F4B0A58"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

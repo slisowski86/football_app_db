@@ -1,0 +1,13 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="footbal_oracle_sql" id="88AE2BB7-D635-99F4-F30F-EDA02F388BDD" version="3.5">
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:24 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>88AE2BB7-D635-99F4-F30F-EDA02F388BDD</designId>
+<usedDesignStorageDescriptors>
+<designDescr class="oracle.dbtools.crest.model.design.Design$DesignStorageDesc" id="079E5C62-3203-7530-AA27-A74E66174A50">
+<designStoragePath>D:\</designStoragePath>
+</designDescr>
+</usedDesignStorageDescriptors>
+</OSDM_Design>

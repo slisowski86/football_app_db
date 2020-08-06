@@ -1,0 +1,10 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.relational.RelationalDesign>
+   <object objectType="SchemaObject" objectID="E1F01F29-6FA3-D01F-474A-F64B595B1996" name="SLISOW_P" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.relational.SchemaObject" propertyParentId="9DFE3A13-50AF-4697-EA74-BA9AC70E973C" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Table" objectID="E76EDAC3-D296-24CF-17DF-45FF9C9E5D96" name="CLUBS" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.relational.Table" propertyParentId="9DFE3A13-50AF-4697-EA74-BA9AC70E973C" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Table" objectID="C295FC2A-A4F4-D43B-105C-764597904C98" name="NATIONS" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.relational.Table" propertyParentId="9DFE3A13-50AF-4697-EA74-BA9AC70E973C" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Table" objectID="BD4E4982-DA54-9152-FE25-38742B9AE007" name="NATIONSv1" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.relational.Table" propertyParentId="9DFE3A13-50AF-4697-EA74-BA9AC70E973C" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Table" objectID="7BA8359E-A215-401A-FC2F-82ADE5DB2022" name="PLAYER" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.relational.Table" propertyParentId="9DFE3A13-50AF-4697-EA74-BA9AC70E973C" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Table" objectID="D6831605-7B55-A762-E370-44935D90DFE8" name="PLAYER_SCORE" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.relational.Table" propertyParentId="9DFE3A13-50AF-4697-EA74-BA9AC70E973C" propertySourceId="" propertyTargetId=""/>
+   <object objectType="Table" objectID="37F2132A-68B3-2757-A3BD-502DCC0692AC" name="PLAYER_STATS" seqName="seg_0" propertyClassName="oracle.dbtools.crest.model.design.relational.Table" propertyParentId="9DFE3A13-50AF-4697-EA74-BA9AC70E973C" propertySourceId="" propertyTargetId=""/>
+</oracle.dbtools.crest.model.design.relational.RelationalDesign>

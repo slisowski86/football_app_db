@@ -1,0 +1,6 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<oracle.dbtools.crest.model.design.relational.RelationalDesign>
+   <object objectType="main_view" objectID="93614E90-4DEE-CCEF-A71C-A099226BBA28" name="SLISOW_P" visible="false"/>
+   <object objectType="sub_view" objectID="26761C93-CF5F-7C4C-6AD6-5BEB336FB9D8" name="SLISOW_P - SubView_1" visible="false"/>
+   <object objectType="sub_view" objectID="1B90871B-FDEB-292F-6CEB-35AD982CFC49" name="SLISOW_P - SubView_2" visible="false"/>
+</oracle.dbtools.crest.model.design.relational.RelationalDesign>

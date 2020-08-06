@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<SchemaObject class="oracle.dbtools.crest.model.design.relational.SchemaObject" name="SLISOW_P" directorySegmentName="seg_0" id="E1F01F29-6FA3-D01F-474A-F64B595B1996">
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:40 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<importedID>47C16AC1-F850-43B9-B9C8-909199CD54D4</importedID>
+</SchemaObject>

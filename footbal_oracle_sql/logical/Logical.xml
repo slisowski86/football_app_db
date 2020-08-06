@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="266062C6-351E-7199-0CF3-06FD68E59E92" mainViewID="62919305-2254-2B2E-8D04-09C7D0C930CB">
+<createdBy>sliso</createdBy>
+<createdTime>2020-07-09 22:56:24 UTC</createdTime>
+<ownerDesignName>footbal_oracle_sql</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

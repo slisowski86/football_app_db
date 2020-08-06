@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Diagram class="oracle.dbtools.crest.swingui.relational.DPVRelationalSubView" name="SLISOW_P - SubView_2" id="1B90871B-FDEB-292F-6CEB-35AD982CFC49">
+<createdBy>sliso</createdBy>
+<modifiedBy>sliso</modifiedBy>
+<createdTime>2020-07-09 22:57:44 UTC</createdTime>
+<autoRoute>false</autoRoute>
+<boxInbox>true</boxInbox>
+<showLegend>false</showLegend>
+<showLabels>false</showLabels>
+<showRelAttributes>false</showRelAttributes>
+<gridEnabled>false</gridEnabled>
+<showGrid>false</showGrid>
+<diagramColor>-1</diagramColor>
+<display>false</display>
+<notation>1</notation>
+<objectViews>
+<OView class="oracle.dbtools.crest.swingui.relational.TVTable" oid="D6831605-7B55-A762-E370-44935D90DFE8" otype="Table" vid="822F5C94-C8B2-2E7C-DBE6-745821DCDADE">
+<hideElementsInCurrentOnly>false</hideElementsInCurrentOnly>
+<bounds x="20" y="20" width="234" height="194"/>
+</OView>
+</objectViews>
+</Diagram>
