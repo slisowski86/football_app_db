@@ -1,5 +1,7 @@
 import cx_Oracle
 
+
+
 def db_connect():
 
 
@@ -7,7 +9,10 @@ def db_connect():
                                 service_name='ORACLEMIF')
     conn = cx_Oracle.connect(user=r'SLISOW_P', password='g2D8M', dsn=dsn_tns)
 
-    cursor = conn.cursor()
-    return cursor
+
+    return conn
 
 
+def conn_close():
+
+    db_connect().close()
