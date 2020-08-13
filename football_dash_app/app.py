@@ -61,7 +61,7 @@ app.layout = html.Div(children=[
     list='player_suggested',
     value='',
     placeholder='Wpisz imię zawodnika...'),
-
+    html.Button('Szukaj',id='search', n_clicks=0),
 
     html.Div(id='my_output', style={'display':'none'}),
     html.Table(id='table'),
@@ -79,23 +79,21 @@ app.layout = html.Div(children=[
 
 ])
 
-@app.callback(Output('my_output', 'children'), [Input('input_1', 'value')])
-def clean_data(value):
 
-     return value
 
 
 
 
 @app.callback(Output(component_id='table',component_property='children' ),
-              [Input(component_id='my_output', component_property='children')])
+              [Input(component_id='search', component_property='n_clicks')],
+              [State(component_id='input_1', component_property='value')])
 
 
-def update_table(input1):
+def update_table(n_clicks, value):
 
 
 
-    x=input1
+    x=value
 
     name = {'player': x}
 
@@ -108,7 +106,9 @@ def update_table(input1):
 
     data = db_df.to_dict('rows')
     columns = [{"name": i, "id": i, } for i in (db_df.columns)]
-    return dt.DataTable( data=data, columns=columns)
+
+    if n_clicks>0:
+        return dt.DataTable( data=data, columns=columns)
 
 
 
