@@ -24,7 +24,8 @@ cursor=conn.cursor()
 
 players=cursor.execute("SELECT name FROM players ").fetchall()
 nationality=cursor.execute("SELECT nationality_name FROM nations").fetchall()
-
+clubs=cursor.execute("SELECT club_name FROM clubs").fetchall()
+club_unique=np.unique(clubs)
 nationality_unique=np.unique(nationality)
 
 column_dict={'Narodowość': 'nationality_name',
@@ -50,6 +51,9 @@ data_to_report=list(column_dict.keys())
                 #'Asysty', 'Żółte kartki', 'Czerowne kartki', 'Strzały na mecz', 'Celność podań(%)',
                 #'Wygrane główki', 'Piłkarz meczu', 'Rating', 'Idealna defensywa', 'Idealny atak', 'Idealne ustawienie',
                 #'Total']
+
+club_nat_dict={'Narodowość': nationality_unique,
+               'Klub': club_unique}
 app.layout = html.Div(children=[
     html.H2(children="Aplikacja Football Score"),
     html.Datalist(
@@ -70,10 +74,11 @@ app.layout = html.Div(children=[
                  options=[
                      {'label': i, 'value': i} for i in data_to_report
                  ],
-                 multi=True
+
+
                  ),
     html.Button('Wstaw',id='dd_button', n_clicks=0),
-    html.Table(id='table2')
+    html.Div(id="out1")
 
 
 
@@ -112,19 +117,47 @@ def update_table(n_clicks, value):
 
 
 
-@app.callback(Output(component_id='table2', component_property='children'),
+@app.callback(Output(component_id='out1', component_property='children'),
               [Input(component_id='dd_button', component_property='n_clicks')],
               [State(component_id='nations_dd', component_property='value')])
 
 
-def update_table_features(n_clicks, values):
+def update_table_features(n_clicks, value):
 
-    columns = [{"name": i, "id": i, } for i in values]
+    if n_clicks > 0:
+        if str(value) in club_nat_dict.keys():
 
-    if n_clicks >0:
-        return dt.DataTable(columns=columns)
+            return html.Div(children=[
+              html.H4(children=value),
+                html.Datalist(
+                    id='nat_club_unique',
+                    children=[html.Option(value=word) for word in club_nat_dict.get(value)]),
+              dcc.Input(id='input_text',
+                        type='text',
+                        list='nat_club_unique'),
+
+              html.Button('Dodaj', id='add_button')
+
+                ])
+        else:
+            return html.Div(children=[
+              html.H4(children=value),
+                dcc.Input(id='min_value',
+                          type='text',
+                          value='',
+                            placeholder='Wpisz min'),
+                dcc.Input(id='max_value',
+                          type='text',
+                          value='',
+                            placeholder='Wpisz max'),
+
+              html.Button('Dodaj', id='add_button')
+
+                ])
+
 
 
 
 if __name__ == '__main__':
+
     app.run_server()
