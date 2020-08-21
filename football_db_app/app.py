@@ -187,17 +187,19 @@ def input_nationality(n_clicks, value):
 def input_stats(n_clicks, value):
     
     new_stats=html.Div(children=[
-              html.H4(children='Podaj zakres'),
-                dcc.Input(id='min_value',
+              html.H4(children='Podaj wartosć'),
+              dcc.Dropdown(id='value_sign',
+                          options=[
+            {'label': 'więcej niż', 'value': '>'},
+            {'label': 'równe', 'value': '='},
+            {'label': 'mniej niż', 'value': '<'}
+        ],),
+                dcc.Input(id='stats_value',
                           type='text',
                           value='',
                           
-                            placeholder='Wpisz min'),
-                dcc.Input(id='max_value',
-                          type='text',
-                          value='',
-                          
-                            placeholder='Wpisz max'),
+                            placeholder='Wpisz wartosć'),
+                
 
               html.Button('Dodaj', id='stats_values_add_button', n_clicks=0),
               dcc.Input(id='control_2', value=value)
@@ -210,13 +212,13 @@ def input_stats(n_clicks, value):
 
 @app.callback(Output(component_id='stats_table',component_property='children'),
               [Input(component_id='stats_values_add_button', component_property='n_clicks')],
-               [State('min_value','value'),
-                State('max_value','value'),
+               [State('value_sign','value'),
+                State('stats_value','value'),
                 State('control_2','value')])
 
-def define_stats_range(n_clicks, min_value, max_value, control_2):
+def define_stats_range(n_clicks, value_sign, stats_value, control_2):
     if n_clicks>0:
-        sql_dict[control_2]=['od '+min_value, ' do '+max_value]
+        sql_dict[control_2]=''.join([value_sign, stats_value])
 
 @app.callback(Output(component_id='filter_table',component_property='children' ),
               [Input(component_id='show_filters', component_property='n_clicks')])
@@ -240,36 +242,67 @@ def show_filters(n_clicks):
 
 
 def show_data(n_clicks):
-    filters_df_sql=pd.DataFrame([sql_dict])
-    filters_df_sql.columns=filters_df_sql.columns.to_series().map(column_dict)
-    #data = filters_df_sql.to_dict('rows')
-    #columns = [{"name": i, "id": i, } for i in (filters_df_sql.columns)]
-    sql_query_dict=filters_df_sql.to_dict()
-    select='SELECT name, '
-    fromT=' FROM players, '
-    where='WHERE'
-    cols=[]
+    
+    result = {}
+    for k, v in sql_dict.items():
+        result[column_dict.get(k, k)] = v
+    
+    select='SELECT players.name, '
+    fromT=' FROM players '
+    joinT=' INNER JOIN '
+    whereAsk=' WHERE '
+   
     tables=[]
-    conditions=[]
+    
+    joins=[]
+    where=[]
     
     query=''
+    conditionDict={'nations':'nations.id=players.nationality_id',
+               'clubs':'clubs.id=players.club_id',
+               'player_score':'players.id=player_score.player_id',
+               'player_stats':'players.id=player_stats.playerid'}
+               
     for k in sql_schema_dict:
         for v in sql_schema_dict[k]:
-            for key in sql_query_dict.keys():
+            for key in result.keys():
                 if key==v:
-                    cols.append(v)
-                    tables.append(k)
-                
+                    tables.append(k+'.'+v)
+                    joins.append('INNER JOIN '+k+' ON '+ conditionDict[k])
+                    if k in ['player_score', 'player_stats']:
+                        
+                        where.append(' '+v+result[v])
+                    else:
+                        
+                        condition=result[v]
+                        conditionQuote=f"'{condition}'"
+                        where.append(' '+v+'='+conditionQuote)
+                    
+                        
                         
                     
 
-    selectedCols=','.join(cols)
+    joins_unique=np.unique(joins)
     selectedTables=','.join(tables)
-    query=select+selectedCols+fromT+selectedTables
+    selectedJoins=' '.join(joins_unique)
+    selectedWhere=' AND '.join(where)
+    allWhere=whereAsk+selectedWhere
+    query=select+selectedTables+fromT+selectedJoins+allWhere
+    
+    db_search_execute = cursor.execute(query).fetchall()
+    query_result_search= [dict(line) for line in
+                        [zip([column[0] for column in cursor.description], row) for row in db_search_execute]]
+    db_df_search = pd.DataFrame(query_result_search)
+
+
+    data = db_df_search.to_dict('rows')
+    columns = [{"name": i, "id": i, } for i in (db_df_search.columns)]
+
     if n_clicks>0:
-         return query
+        return dt.DataTable(data=data, columns=columns)
+    
 
 if __name__ == '__main__':
     app.run_server()
 
-    app.run_server()
+    
