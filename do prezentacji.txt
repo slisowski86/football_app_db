@@ -1,0 +1,2 @@
+C:\Program Files\PostgreSQL\12\bin>pg_dump -f D:\footballstats.dump -Fc --no-acl -no-owner -h localhost -U postgres --schema=public FootballStats
+Password:

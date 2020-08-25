@@ -2,6 +2,7 @@ import cx_Oracle
 
 
 
+
 def db_connect():
 
 
