@@ -3,13 +3,13 @@ import pandas as pd
 
 #wczytujemy ramki danych
 
-players_stats_df=pd.read_csv("D:/Bazy danych/Projekt/clear_data/players_stats_all.csv")
-players_score_df=pd.read_csv("D:/Bazy danych/Projekt/clear_data/players_score_all.csv")
+players_stats_df=pd.read_csv("D:/Bazy_danych/Projekt/clear_data/players_stats_all.csv")
+players_score_df=pd.read_csv("D:/Bazy_danych/Projekt/clear_data/players_score_all.csv")
 
 players_stats_df.drop(players_stats_df.filter(regex="Unname"),axis=1, inplace=True)
 players_score_df.drop(players_score_df.filter(regex="Unname"),axis=1, inplace=True)
 
-players=pd.read_csv("D:/Bazy danych/Projekt/raw_data/Players.csv", encoding = "ISO-8859-1")
+players=pd.read_csv("D:/Bazy_danych/Projekt/raw_data/Players.csv", encoding = "ISO-8859-1")
 
 #tworzymy zgodne ramki danych, aby byli tacy sami zawodnicy w każdej ramce, 
 

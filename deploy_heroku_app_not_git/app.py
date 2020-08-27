@@ -63,28 +63,11 @@ result={}
 
 
 
-column_dict={ 'Narodowość':'nationality_name',
-             'Klub':'club_name',
-             'Wiek':'age',
-             'Rozegrane_mecze':'appearances',
-             'Rozegrane_minuty':'mins',
-             'Bramki':'goals',
-             'Asysty':'assists',
-             'Zółte_kartki':'yel',
-             'Czerwone_kartki':'red',
-             'Strzały_na_mecz':'shots_per_game',
-             'Celność_podań(%)':'pass_score',
-             'Wygrane_główki':'aerialswon',
-             'Piłkarz_meczu': 'man_of_the_match',
-             'Rating':'rating',
-             'Idealna_defensywa' : 'perfdef',
-             'Idealny_atak':'perfattack',
-             'Idealne_ustawienie': 'perfposs',
-             'Total':'total'}
-data_to_report=['Wiek', 'Rozegrane_mecze', 'Rozegrane_minuty', 'Bramki',
-                'Asysty', 'Żółte_kartki', 'Czerowne_kartki', 'Strzały_na_mecz', 'Celność_podań(%)',
-                'Wygrane_główki', 'Piłkarz_meczu', 'Rating', 'Idealna_defensywa', 'Idealny_atak', 'Idealne_ustawienie',
-                'Total']
+
+data_to_report=['age', 'appearances', 'mins', 'goals',
+                'assists', 'yel', 'red', 'shots_per_game', 'pass_score',
+                'aerialswon', 'man_of_the_match', 'rating', 'perfdef', 'perfattack', 'perfposs',
+                'total']
 
 
 
@@ -180,12 +163,14 @@ def update_table(n_clicks, value):
     
 
     if n_clicks>0:
+        query_result=[]
         try:
             conn = psycopg2.connect(DATABASE_URL, sslmode='require')
             cursor = conn.cursor()
             cursor.execute("SELECT name,age, nations.nationality_name, clubs.club_name, player_score.* FROM players, nations, clubs, player_score WHERE players.name = %s AND players.nationality_id=nations.id AND players.club_id=clubs.id AND player_score.player_id=players.id" ,[x])
             db_execute=cursor.fetchall()
-   
+            query_result = [dict(line) for line in
+                        [zip([column[0] for column in cursor.description], row) for row in db_execute]]
             conn.commit()
         
             cursor.close()
@@ -194,8 +179,7 @@ def update_table(n_clicks, value):
         finally:
             if conn is not None:
                 conn.close()
-        query_result = [dict(line) for line in
-                        [zip([column[0] for column in cursor.description], row) for row in db_execute]]
+        
         db_df = pd.DataFrame(query_result)
    
 
@@ -213,7 +197,7 @@ def update_table(n_clicks, value):
 def input_nationality(n_clicks, value):
     if n_clicks>0:
         
-        sql_dict['Narodowość']=str(value)
+        sql_dict['nationality_name']=str(value)
         
     
 @app.callback(Output(component_id='clubs_dd', component_property='children'),
@@ -224,28 +208,11 @@ def input_nationality(n_clicks, value):
 def input_clubs(n_clicks, value):
     if n_clicks>0:
         
-        sql_dict['Klub']=str(value)
+        sql_dict['club_name']=str(value)
         
     
     
-@app.callback(Output(component_id='nations_dd', component_property='value'),
-               
-              [Input(component_id='show_filters', component_property='n_clicks')])
-              
 
-def clear_nationality(n_clicks):
-    if n_clicks>0:
-        return ""
-
-
-@app.callback(Output(component_id='clubs_dd', component_property='value'),
-               
-              [Input(component_id='show_filters', component_property='n_clicks')])
-              
-
-def clear_club(n_clicks):
-    if n_clicks>0:
-        return ""
         
 
 @app.callback(Output(component_id='stats_container', component_property='children'),
@@ -259,9 +226,9 @@ def input_stats(n_clicks, value):
               html.H4(children='Podaj wartosć'),
               dcc.Dropdown(id='value_sign',
                           options=[
-            {'label': 'więcej niż', 'value': '>'},
-            {'label': 'równe', 'value': '='},
-            {'label': 'mniej niż', 'value': '<'}
+            {'label': 'more_than', 'value': '>'},
+            {'label': 'equal', 'value': '='},
+            {'label': 'less_than', 'value': '<'}
         ],),
                 dcc.Input(id='stats_value',
                           type='text',
@@ -287,52 +254,25 @@ def input_stats(n_clicks, value):
 
 def define_stats_range(n_clicks, value_sign, stats_value, control_2):
     if n_clicks>0:
-        sql_dict[control_2]=''.join([value_sign, stats_value])
+        stats_value=''.join([value_sign, stats_value])
+        sql_dict[control_2]=str(stats_value)
 
 
 
-@app.callback(Output(component_id='stats_container',component_property='style' ),
-              [Input(component_id='show_filters', component_property='n_clicks')])
 
-def clear_stats(n_clicks):
-    if n_clicks>0:
-        return {'display':'none'}
-    
-@app.callback(Output(component_id='stats_dd',component_property='value' ),
-              [Input(component_id='show_filters', component_property='n_clicks')])
-
-def clear_stats(n_clicks):
-    if n_clicks>0:
-        return ""
 
 
 @app.callback(Output(component_id='filter_table',component_property='children' ),
               [Input(component_id='show_filters', component_property='n_clicks')])
              
-
 def show_filters(n_clicks):
     
     
     
-    if n_clicks>0:
-        filters_df = pd.DataFrame([sql_dict])
+    sql_temp_dict=copy.deepcopy(sql_dict)
+    filters_df = pd.DataFrame([sql_temp_dict])
+    sql_dict.clear()
     
-
-        data = filters_df.to_dict('rows')
-        columns = [{"name": i, "id": i, } for i in (filters_df.columns)]
-        return html.Div([dt.DataTable(data=data, columns=columns),
-                         html.Button('Podkaż dane', id='show_data_button', n_clicks=0)])
-
-@app.callback(Output(component_id='sql_table',component_property='children' ),
-              [Input(component_id='show_data_button', component_property='n_clicks')])
-              
-
-
-def show_data(n_clicks):
-    
-    db_search_execute=[]
-    for k, v in sql_dict.items():
-        result[column_dict.get(k, k)] = v
     
     select='SELECT players.name, '
     fromT=' FROM players '
@@ -352,20 +292,20 @@ def show_data(n_clicks):
                'players':'age'}
     for k in sql_schema_dict:
         for v in sql_schema_dict[k]:
-            for key in result.keys():
+            for key in sql_temp_dict.keys():
                 if key==v:
                     tables.append(k+'.'+v)
                     joins.append('INNER JOIN '+k+' ON '+ conditionDict[k])
                     if k in ['player_score', 'player_stats']:
                         
-                        where.append(' '+v+result[v])
+                        where.append(' '+v+sql_temp_dict[v])
                     
                         
                     else:
                         if conditionDict[k]=='age':
-                            where.append(' '+v+result[v])
+                            where.append(' '+v+sql_temp_dict[v])
                         else:
-                            condition=result[v]
+                            condition=sql_temp_dict[v]
                             conditionQuote=f"'{condition}'"
                             where.append(' '+v+'='+conditionQuote)
                     
@@ -383,22 +323,44 @@ def show_data(n_clicks):
     
     
     
-   
+    if n_clicks>0:
+        
+        sql_temp_dict.clear()
+        
+
+        data = filters_df.to_dict('records')
+        columns = [{"name": i, "id": i, } for i in (filters_df.columns)]
+        return html.Div([dt.DataTable(data=data, columns=columns),
+                         html.Button('Podkaż dane', id='show_data_button', n_clicks=0),
+                         dcc.Input(id='query', value=query, style={'display':'none'})])
+
+@app.callback(Output(component_id='sql_table',component_property='children' ),
+              [Input(component_id='show_data_button', component_property='n_clicks'),
+               Input('query', 'value')])
+              
+
+
+def show_data(n_clicks, value):
+    
+    
+    
+    db_search_execute=[]
 
     if n_clicks>0:
         
         sql_dict.clear()
-        result.clear()
-        
+         
+        query_result_search=[]
         
         
         
         try:
             conn = psycopg2.connect(DATABASE_URL, sslmode='require')
             cursor = conn.cursor()
-            cursor.execute(query)
+            cursor.execute(value)
             db_search_execute=cursor.fetchall()
-   
+            query_result_search= [dict(line) for line in
+                        [zip([column[0] for column in cursor.description], row) for row in db_search_execute]]
             conn.commit()
         
             cursor.close()
@@ -409,22 +371,21 @@ def show_data(n_clicks):
                     conn.close()
     
     
-            query_result_search= [dict(line) for line in
-                        [zip([column[0] for column in cursor.description], row) for row in db_search_execute]]
-            db_df_search = pd.DataFrame(query_result_search)
+        
+        db_df_search = pd.DataFrame(query_result_search)
 
 
-            data = db_df_search.to_dict('rows')
-            columns = [{"name": i, "id": i, } for i in (db_df_search.columns)]
-            if len(data)==0:
-                return html.Div(children=[html.A(html.Button('Nowe wyszukiwanie'),href='/'),
-                                          html.H6(children="Twoje zapytanie: "+query + ": Brak danych")])
-            else:
-                return html.Div(children=[html.A(html.Button('Nowe wyszukiwanie'),href='/'),
-                                      html.H6(children="Twoje zapytanie: "+query),
+        data = db_df_search.to_dict('records')
+        columns = [{"name": i, "id": i, } for i in (db_df_search.columns)]
+        
+        if len(data)==0:
+            return html.Div(children=[html.A(html.Button('Nowe wyszukiwanie'),href='/'),
+                                          html.H6(children="Twoje zapytanie: "+value + ": Brak danych")])
+        else:
+            return html.Div(children=[html.A(html.Button('Nowe wyszukiwanie'),href='/'),
+                                      html.H6(children="Twoje zapytanie: "+value),
                                       dt.DataTable(data=data, columns=columns)])
      
     
-
 if __name__ == '__main__':
-    app.run_server()
+    app.run_server(debug=True)

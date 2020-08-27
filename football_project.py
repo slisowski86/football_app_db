@@ -8,9 +8,9 @@ Created on Fri May 15 05:45:12 2020
 import pandas as pd
 
 
-df_players=pd.read_csv("D:/Bazy danych/Projekt/raw_data/Players.csv", sep=",", encoding ='latin-1')
-df_players_score=pd.read_csv("D:/Bazy danych/Projekt/raw_data/Players_Score.csv", sep="," , encoding ='latin-1')
-df_players_stats=pd.read_csv("D:/Bazy danych/Projekt/raw_data/Players_Stats.csv", sep=",", encoding ='latin-1')
+df_players=pd.read_csv("D:/Bazy_danych/raw_data/Players.csv", sep=",", encoding ='latin-1')
+df_players_score=pd.read_csv("D:/Bazy_danych/raw_data/Players_Score.csv", sep="," , encoding ='latin-1')
+df_players_stats=pd.read_csv("D:/Bazy_danych/raw_data/Players_Stats.csv", sep=",", encoding ='latin-1')
 
                                                                                                 
 
