@@ -288,7 +288,7 @@ def show_filters(n_clicks):
     conditionDict={'nations':'nations.id=players.nationality_id',
                'clubs':'clubs.id=players.club_id',
                'player_score':'players.id=player_score.player_id',
-               'player_stats':'players.id=player_stats.playerid',
+               'player_stats':'players.id=player_stats.player_id',
                'players':'age'}
     for k in sql_schema_dict:
         for v in sql_schema_dict[k]:

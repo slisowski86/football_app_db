@@ -3,13 +3,13 @@ import pandas as pd
 
 #wczytujemy ramki danych
 
-players_stats_df=pd.read_csv("D:/Bazy_danych/Projekt/clear_data/players_stats_all.csv")
-players_score_df=pd.read_csv("D:/Bazy_danych/Projekt/clear_data/players_score_all.csv")
+players_stats_df=pd.read_csv("D:/Bazy_danych/clear_data/players_stats_all.csv")
+players_score_df=pd.read_csv("D:/Bazy_danych/clear_data/players_score_all.csv")
 
 players_stats_df.drop(players_stats_df.filter(regex="Unname"),axis=1, inplace=True)
 players_score_df.drop(players_score_df.filter(regex="Unname"),axis=1, inplace=True)
 
-players=pd.read_csv("D:/Bazy_danych/Projekt/raw_data/Players.csv", encoding = "ISO-8859-1")
+players=pd.read_csv("D:/Bazy_danych/raw_data/Players.csv", encoding = "ISO-8859-1")
 
 #tworzymy zgodne ramki danych, aby byli tacy sami zawodnicy w każdej ramce, 
 
@@ -120,7 +120,25 @@ player_score.drop('Appear', axis=1, inplace=True)
 # w tabeli player score zastępujemy "-" na 0
 player_score=player_score.replace('-',0)
 
-#usuwamy index ze wszystkich tabel
+
+
+
+player_stats['total'] = player_stats.total.str.replace(',', '.')
+player_stats['perfattack'] = player_stats.perfattack.str.replace(',', '.')
+
+player_stats['total']=player_stats['total'].astype(float)
+player_stats['perfattack']=player_stats['perfattack'].astype(float)
+player_stats['perfdef']=player_stats['perfdef'].astype(float)
+
+
+for col in ['SpG', 'PS', 'AerialsWon', 'Rating']:
+    player_score[col]=player_score[col].astype(float)
+
+for col in ['Apps', 'Goals', 'Assists', 'Yel', 'Red', 'MotM']:
+    player_score[col]=player_score[col].astype(int)
+    
+print(player_stats.info())
+
 
 
 player.to_csv('sql_data/player.csv', index=False)
@@ -128,3 +146,7 @@ nations.to_csv('sql_data/nations.csv', index=False)
 clubs.to_csv('sql_data/clubs.csv', index=False)
 player_score.to_csv('sql_data/player_score.csv', index=False)
 player_stats.to_csv('sql_data/player_stats.csv', index=False)
+
+
+
+
