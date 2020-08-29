@@ -216,7 +216,7 @@ def update_table(n_clicks, value):
     
     db_execute=[]
 
-    name={'player':value}
+    
 
     query_result=[]
 
@@ -226,7 +226,7 @@ def update_table(n_clicks, value):
         try:
             conn = psycopg2.connect(DATABASE_URL, sslmode='require')
             cursor = conn.cursor()
-            cursor.execute("SELECT name,age, nations.nationality_name, clubs.club_name, player_score.* FROM players, nations, clubs, player_score WHERE players.name = :player AND players.nationality_id=nations.id AND players.club_id=clubs.id AND player_score.player_id=players.id" ,name)
+            cursor.execute("SELECT name,age, nations.nationality_name, clubs.club_name, player_score.* FROM players, nations, clubs, player_score WHERE players.name = %s AND players.nationality_id=nations.id AND players.club_id=clubs.id AND player_score.player_id=players.id" ,[value])
             db_execute=cursor.fetchall()
             query_result = [dict(line) for line in
                         [zip([column[0] for column in cursor.description], row) for row in db_execute]]
