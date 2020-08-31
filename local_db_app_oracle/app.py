@@ -1,4 +1,11 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Mon Aug 31 12:59:12 2020
+
+@author: sliso
+"""
+
+# -*- coding: utf-8 -*-
 # -*- coding: utf-8 -*-
 """
 Created on Fri Aug 21 18:10:10 2020
@@ -12,7 +19,7 @@ import dash_html_components as html
 import dash_table as dt
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
-
+import psycopg2
 import numpy as np
 import pandas as pd
 
@@ -27,7 +34,7 @@ dsn_tns = cx_Oracle.makedsn('dbserver.mif.pg.gda.pl', '1521',
 
 
 
-#psycopg2.connect(host="localhost",database="FootballStats",user="postgres",password="Faraon86@")
+
 #psycopg2.connect(DATABASE_URL, sslmode='require')
 
 
@@ -63,15 +70,18 @@ finally:
     
 
 
-club_unique=np.unique(clubs)
-nationality_unique=np.unique(nationality)
 
+club_unique=list(np.unique(clubs))
+nationality_unique=list(np.unique(nationality))
+club_unique.append('All')
+nationality_unique.append('All')
 
 score.remove('PLAYER_ID')
 stats.remove('PLAYER_ID')
 score = [element.lower() for element in score]
 stats = [element.lower() for element in stats]
-
+score.append('All')
+stats.append('All')
 
 
 
@@ -98,9 +108,11 @@ app.layout = html.Div(children=[
     html.H4(children="Wiek"),
     dcc.Dropdown(id='age_value_sign',
                           options=[
+                              
             {'label': 'more_than', 'value': '>'},
             {'label': 'equal', 'value': '='},
-            {'label': 'less_than', 'value': '<'}
+            {'label': 'less_than', 'value': '<'},
+            {'label': 'All', 'value': 'All'}
         ],
         placeholder="wybierz filtr",
         style={'width':'40%'}),
@@ -191,7 +203,8 @@ app.layout = html.Div(children=[
     dt.DataTable(id='filters_table', columns=[{'id':'tabela', 'name':'tabela'},
                                                 {'id':'filtr', 'name':'filtr'},
                                               {'id':'dane', 'name':'dane'}], data=[],
-                                     row_deletable=True),
+                                     row_deletable=True
+                                     ),
     
     html.Button('Pokaż dane',id='show_data_button', n_clicks=0),
     html.Div(id='sql_table'),
@@ -317,8 +330,66 @@ def update_filters(age_button, nations_dd_button, clubs_dd_button, score_dd_butt
    
        
     return  existing_data
-              
 
+
+@app.callback(Output('age_value', 'disabled'),
+               
+              [Input('age_value_sign','value')])
+
+
+def disable_age_value(value):
+    
+    if value=='All':
+        return True
+
+@app.callback(Output('score_value_sign', 'disabled'),
+               
+              [Input('score_dd','value')])
+
+
+
+def disable_dd_score(value):
+    
+    if value=='All':
+        return True
+                
+    
+    
+@app.callback(Output('stats_value_sign', 'disabled'),
+               
+              [Input('stats_dd','value')])
+
+
+def disable_dd_stats(value):
+    
+    if value=='All':
+        
+        return True
+    
+@app.callback(Output('score_value', 'disabled'),
+              
+              [Input('score_dd','value')])
+
+
+
+def disable_score_input(value):
+    
+    if value=='All':
+        return True
+                
+    
+    
+@app.callback(Output('stats_value', 'disabled'),
+               
+              [Input('stats_dd','value')])
+
+
+def disable_statsinput(value):
+    
+    if value=='All':
+        
+        return True
+                
 @app.callback(Output('sql_table','children'),
               [Input('show_data_button','n_clicks'),
                Input('filters_table','data')])
@@ -340,7 +411,7 @@ def show_data(n_clicks, data):
     fromQuery=" FROM players "
     join=" INNER JOIN "
     on=" ON "
-    where=" WHERE "
+    where=""
     
     
     if n_clicks>0:
@@ -355,54 +426,102 @@ def show_data(n_clicks, data):
             for v in sql_dict[k]:
                 for key in v.keys():
                     if k=='players':
-                        tables.append(str(k)+'.'+str(key))
-                        joins.append(' ')
-                        whereConditions.append(str(key)+v[key])
-                    elif k in ['player_score', 'player_stats']:
-                        tables.append(str(k)+'.'+str(key))
-                        joins.append(join+ str(k) + on + constraintDict[k])
-                        whereConditions.append(str(key)+v[key])
-                    else:
-                        tables.append(str(k)+'.'+str(key))
-                        joins.append(join+ str(k) + on + constraintDict[k])
-                        condition=v[key]
-                        conditionQuote=f"'{condition}'"
-                        whereConditions.append(str(key)+'='+conditionQuote)
-        
-            
-        selectedTables=', '.join(tables)
-        selectedJoins=''.join(joins)
-        selectedWhere= ' AND '.join(whereConditions)
-        query=select+selectedTables+fromQuery+selectedJoins+where+selectedWhere
-        
-        try:
-            conn = cx_Oracle.connect(user=r'SLISOW_P', password='g2D8M', dsn=dsn_tns)
-            cursor = conn.cursor()
-            cursor.execute(query)
-            db_search_execute=cursor.fetchall()
-            query_result_search= [dict(line) for line in
+                        if v[key]=='All':
+                            tables.append(str(k)+'.'+str(key))
+                            joins.append(' ')
+                            where=''
+                        else:
+                            tables.append(str(k)+'.'+str(key))
+                            joins.append(' ')
+                            where=' WHERE '
+                            whereConditions.append(str(key)+v[key])
+                    elif k=='player_score':
+                        if key=='All':
+                            
+                            tables.append(str(k)+'.*')
+                            joins.append(join+ str(k) + on + constraintDict[k])
+                            
+                    
+                        else:
+                            tables.append(str(k)+'.'+str(key))
+                            joins.append(join+ str(k) + on + constraintDict[k])
+                            whereConditions.append(str(key)+v[key])
+                            where=' WHERE '
+                    elif k=='player_stats':
+                        if key=='All':
+                            
+                            tables.append(str(k)+'.*')
+                            joins.append(join+ str(k) + on + constraintDict[k])
+                            
+                    
+                        else:
+                            tables.append(str(k)+'.'+str(key))
+                            joins.append(join+ str(k) + on + constraintDict[k])
+                            whereConditions.append(str(key)+v[key])
+                            where=' WHERE '
+                    elif k=='clubs':
+                        if v[key]=='All':
+                            tables.append(str(k)+'.'+str(key))
+                            joins.append(join+ str(k) + on + constraintDict[k])
+                            
+                        else:
+                            tables.append(str(k)+'.'+str(key))
+                            joins.append(join+ str(k) + on + constraintDict[k])
+                            condition=v[key]
+                            conditionQuote=f"'{condition}'"
+                            whereConditions.append(str(key)+'='+conditionQuote)
+                            where=' WHERE '
+                    elif k=='nations':
+                        if v[key]=='All':
+                            tables.append(str(k)+'.'+str(key))
+                            joins.append(join+ str(k) + on + constraintDict[k])
+                            
+                        else:
+                            tables.append(str(k)+'.'+str(key))
+                            joins.append(join+ str(k) + on + constraintDict[k])
+                            condition=v[key]
+                            conditionQuote=f"'{condition}'"
+                            whereConditions.append(str(key)+'='+conditionQuote)
+                            where=' WHERE '
+                   
+                        
+                    
+        if len(tables)>0:
+            selectedTables=', '.join(tables)
+            selectedJoins=''.join(joins)
+            selectedWhere= ' AND '.join(whereConditions)
+            query=select+selectedTables+fromQuery+selectedJoins+where+selectedWhere
+       
+            try:
+                conn = cx_Oracle.connect(user=r'SLISOW_P', password='g2D8M', dsn=dsn_tns)
+                cursor = conn.cursor()
+                cursor.execute(query)
+                db_search_execute=cursor.fetchall()
+                query_result_search= [dict(line) for line in
                         [zip([column[0] for column in cursor.description], row) for row in db_search_execute]]
-            conn.commit()
+                conn.commit()
         
-            cursor.close()
-        except cx_Oracle.DatabaseError as error:
-            print(error)
-        finally:
-            if conn is not None:
-                    conn.close()
-        db_df_search = pd.DataFrame(query_result_search)
+                cursor.close()
+            except cx_Oracle.DatabaseError as error:
+                print(error)
+            finally:
+                if conn is not None:
+                        conn.close()
+            db_df_search = pd.DataFrame(query_result_search)
 
 
-        data = db_df_search.to_dict('records')
-        columns = [{"name": i, "id": i, } for i in (db_df_search.columns)]
+            data = db_df_search.to_dict('records')
+            columns = [{"name": i, "id": i, } for i in (db_df_search.columns)]
         
-        if len(data)==0:
-            return html.Div(children=[html.A(html.Button('Nowe wyszukiwanie'),href='/'),
-                                          html.H6(children="Twoje zapytanie: "+query + ": Brak danych")])
-        else:
+        
             return html.Div(children=[html.A(html.Button('Nowe wyszukiwanie'),href='/'),
                                       html.H6(children="Twoje zapytanie: "+query),
                                       dt.DataTable(data=data, columns=columns)])
-        return query
+        
+        else:
+            html.Div(children=[html.A(html.Button('Nowe wyszukiwanie'),href='/'),
+                               html.H6(children="Brak danych")])
+                               
+        
 if __name__ == '__main__':
     app.run_server()
