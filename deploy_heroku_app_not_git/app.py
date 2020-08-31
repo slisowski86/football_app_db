@@ -77,8 +77,8 @@ nationality_unique=list(np.unique(nationality))
 club_unique.append('All')
 nationality_unique.append('All')
 
-#score.remove('PLAYER_ID')
-#stats.remove('PLAYER_ID')
+score.remove('player_id')
+stats.remove('player_id')
 score = [element.lower() for element in score]
 stats = [element.lower() for element in stats]
 score.append('All')
@@ -520,7 +520,7 @@ def show_data(n_clicks, data):
                                       dt.DataTable(data=data, columns=columns)])
         
         else:
-            html.Div(children=[html.A(html.Button('Nowe wyszukiwanie'),href='/'),
+            return  html.Div(children=[html.A(html.Button('Nowe wyszukiwanie'),href='/'),
                                html.H6(children="Brak danych")])
         
 if __name__ == '__main__':
